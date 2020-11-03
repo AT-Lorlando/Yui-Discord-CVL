@@ -1,5 +1,5 @@
 module.exports.run = (client, message, args) => {
-  message.channel.bulkDelete(1, true);
+  message.channel.bulkDelete(1, true)
 
   message.channel.send(args.join(' '))
 }

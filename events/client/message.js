@@ -12,7 +12,7 @@ module.exports = (client, message) => {
   console.log(command)
 
   if (command.help.args && !args.length) {
-    return message.channel.send("Tu as oublié les arguments !")
+    return message.channel.send('Tu as oublié les arguments !')
   }
 
   if (command.help.admin && !message.member.roles.cache.has(IDADMIN)) {
@@ -21,5 +21,5 @@ module.exports = (client, message) => {
     )
   }
 
-  command.run(client, message, args);
+  command.run(client, message, args)
 }
