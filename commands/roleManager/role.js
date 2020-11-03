@@ -1,4 +1,9 @@
 const { getItems, discordLog } = require('../../utils')
+const {
+  addRoleChannelPattern,
+  rolePattern,
+  tdRolePattern,
+} = require('../../config')
 
 /**
  *  Use to set a role to a user
@@ -6,13 +11,13 @@ const { getItems, discordLog } = require('../../utils')
  * @param {Message} message
  * @param {String} args
  */
-module.exports.run = (client, message, args) => {
+exports.run = (client, message, args) => {
   const user = message.author
   const member = message.guild.members.cache.get(user.id)
   const channel = message.channel
 
   // Check that the arg is a valid role
-  if (!args[0].match(/<@&\d{18}>/))
+  if (!args[0].match(rolePattern))
     return channel
       .send("Ce n'est pas un rôle !")
       .catch((err) => console.error(err))
@@ -23,7 +28,7 @@ module.exports.run = (client, message, args) => {
 
   // Get all used channels
   const channelLogs = discordLog(message.guild)
-  const channels = getItems('channels', message.guild, /ajout-de-role.*/i)
+  const channels = getItems('channels', message.guild, addRoleChannelPattern)
 
   // Check that this is a correct channel to give a role
   const channelFind = channels.find((item) => item.id === channel.id)
@@ -38,7 +43,7 @@ module.exports.run = (client, message, args) => {
   const rolesForChannel = getItems(
     'roles',
     message.guild,
-    /.*TD.*/
+    tdRolePattern
   ).filter((item) => item.name.match(rolesFilter))
 
   // Give the role if the wanted role is in the list
@@ -61,7 +66,7 @@ module.exports.run = (client, message, args) => {
   }
 }
 
-module.exports.help = {
+exports.help = {
   name: 'role',
   description: 'Vous attribue les rôles que vous avez demandé !',
   args: true,
