@@ -28,15 +28,15 @@ const loadEvents = (dir = './events/') => {
     )
 
     for (const event of events) {
-      const evt = require(`${dir}/${dirs}/${event}`);
-      const evtName = event.split(".")[0];
-      client.on(evtName, evt.bind(null, client));
-      console.log(`Evenement chargé: ${evtName}`);
+      const evt = require(`${dir}/${dirs}/${event}`)
+      const evtName = event.split('.')[0]
+      client.on(evtName, evt.bind(null, client))
+      console.log(`Evenement chargé: ${evtName}`)
     }
   })
 }
 
-loadCommands();
-loadEvents();
+loadCommands()
+loadEvents()
 
-client.login("");
+client.login(process.env.TOKEN)
