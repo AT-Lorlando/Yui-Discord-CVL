@@ -23,7 +23,7 @@ function getItems(from, guild, filter) {
  */
 exports.discordLog = function (guild) {
   const channelLogsId = getItems('channels', guild, /logs/).find(
-    (item) => item.name === 'logs'
+    (item) => item.name === 'log'
   ).id
 
   return guild.channels.cache.get(channelLogsId)
