@@ -11,6 +11,9 @@ function getRu(client) {
   const channelRu = discordRu(client)
 
   return async function () {
+    // Remove previous messages
+    await channelRu.bulkDelete(10)
+
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     await page.goto(urlRu)
