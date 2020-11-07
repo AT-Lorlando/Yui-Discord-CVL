@@ -6,7 +6,8 @@ module.exports.run = (client, message) => {
 
 module.exports.help = {
   name: 'version',
-  description: 'Get the version of the bot',
+  description:
+    'Get the version of the bot\n\nWill return the ot version in the channel \nNo argument\n```sh\n# Get bot version\n$ Yui version\n```',
   args: false,
   admin: true,
 }
