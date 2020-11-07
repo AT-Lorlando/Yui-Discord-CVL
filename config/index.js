@@ -6,7 +6,5 @@ exports.addRoleChannelPattern = /ajout-de-role.*/i
 exports.tdRolePattern = /.*TD.*/
 exports.rolePattern = /<@&\d{18}>/i
 exports.cronRu =
-  process.env.NODE_ENV === 'production'
-    ? '0 0 11 1-6,9-12 1-5'
-    : '*/5 * * * * *'
+  process.env.NODE_ENV === 'production' ? '0 8 * 1-6,9-12 1' : '*/15 * * * * *'
 exports.urlRu = process.env.RU_URL
