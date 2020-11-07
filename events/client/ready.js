@@ -5,10 +5,21 @@ const dayjs = require('dayjs')
 require('dayjs/locale/fr')
 dayjs.locale('fr')
 const { discordRu } = require('../../utils')
-const { cronRu, urlRu } = require('../../config/index')
+const { cronRu, ruUrlBourges, ruUrlBlois } = require('../../config/index')
 
-function getRu(client) {
-  const channelRu = discordRu(client)
+const rus = [
+  {
+    name: 'bourges',
+    url: ruUrlBourges,
+  },
+  {
+    name: 'blois',
+    url: ruUrlBlois,
+  },
+]
+
+function getRu(client, name, url) {
+  const channelRu = discordRu(client, name)
 
   return async function () {
     // Remove previous messages
@@ -16,7 +27,7 @@ function getRu(client) {
 
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
-    await page.goto(urlRu)
+    await page.goto(url)
 
     const allDays = await page.evaluate(() => {
       const menus = {}
@@ -71,21 +82,31 @@ function getRu(client) {
         })
         text += '\n'
       })
-      const embed = new MessageEmbed()
-        .setTitle(`${date.toUpperCase()}`)
-        .setDescription(`Découvrez le repas du RU LAHITOLLE !`)
-        .setColor('#dc143c')
-        .addField('Le repas du jour :', text)
-        .setFooter('En vous souhaitant bonne appétit !')
-      channelRu.send(embed).catch((err) => console.error(err))
+
+      channelRu
+        .send(createEmbedMenu('lahitolle'.toUpperCase(), date, text))
+        .catch((err) => console.error(err))
     })
 
     console.log(allDays)
   }
 }
 
+function createEmbedMenu(pos, date, text) {
+  return new MessageEmbed()
+    .setTitle(`${date.toUpperCase()}`)
+    .setDescription(`Découvrez le repas du RU ${pos} !`)
+    .setColor('#dc143c')
+    .addField('Le repas du jour :', text)
+    .setFooter('En vous souhaitant un bon appétit !')
+}
+
 module.exports = (client) => {
   console.log(`Logged in as ${client.user.tag}!`)
 
-  schedule.scheduleJob(cronRu, getRu(client))
+  if (process.env.CRON === 'production') {
+    rus.forEach((ru) => {
+      schedule.scheduleJob(cronRu, getRu(client, ru.name, ru.url))
+    })
+  }
 }
