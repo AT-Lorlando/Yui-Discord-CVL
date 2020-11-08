@@ -1,6 +1,6 @@
 {
   "name": "discordcrowdcontrol",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Bot pour contrôler le discord de l'INSA CVL",
   "main": "index.js",
   "scripts": {
