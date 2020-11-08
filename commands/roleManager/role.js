@@ -39,6 +39,7 @@ exports.run = (client, message, args) => {
     channel.name.replace(/.*(?<year>\d.)/gi, '$<year>') + '.+',
     'ig'
   )
+
   // Filtre all roles depending of the year of the channel where the role is asking
   const rolesForChannel = getItems(
     'roles',

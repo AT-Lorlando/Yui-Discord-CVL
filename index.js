@@ -1,10 +1,10 @@
-require('dotenv').config()
+const path = require('path')
+const envFilename = process.env.NODE_ENV === 'production' ? '.env' : '.env.dev'
+require('dotenv').config({ path: path.resolve(process.cwd(), envFilename) })
 const { Client, Collection } = require('discord.js')
-const { PREFIX, IDADMIN } = require('./config')
 const { readdirSync } = require('fs')
-//const { load } = require('dotenv/types')
 
-const client = new Client()
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 client.commands = new Collection()
 
 const loadCommands = (dir = './commands/') => {

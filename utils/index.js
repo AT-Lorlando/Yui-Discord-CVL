@@ -29,4 +29,19 @@ exports.discordLog = function (guild) {
   return guild.channels.cache.get(channelLogsId)
 }
 
+/**
+ * Get the `repas-ru` channels
+ * @param {Guild | Client} guild
+ * @param {'bourges' |'blois' } pos
+ * @returns {int}
+ */
+exports.discordRu = function (guild, pos) {
+  const name = 'repas-ru-' + pos
+  const channelRuId = getItems('channels', guild, new RegExp(name)).find(
+    (item) => item.name === name
+  ).id
+
+  return guild.channels.cache.get(channelRuId)
+}
+
 exports.getItems = getItems
