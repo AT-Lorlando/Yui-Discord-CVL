@@ -8,11 +8,11 @@ function createMessageEmbed(commands) {
   let embed = new MessageEmbed().setColor('#20bf6b')
   let title = ''
   if (!commands.size) {
-    title = `Aide pour l\'utilisation de ${process.env.npm_package_name}, version ${process.env.npm_package_version}`
+    title = `Aide pour l'utilisation de ${process.env.npm_package_name}, version ${process.env.npm_package_version}`
     embed.setDescription(`Commande \`${commands.help.name}\``)
     embed.addField(commands.help.name, commands.help.description)
   } else {
-    title = `Aide pour l\'utilisation de ${process.env.npm_package_name}, version ${process.env.npm_package_version}`
+    title = `Aide pour l'utilisation de ${process.env.npm_package_name}, version ${process.env.npm_package_version}`
     commands.forEach((command) => {
       embed.addField(command.help.name, command.help.description)
     })

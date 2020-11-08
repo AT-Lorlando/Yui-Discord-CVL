@@ -70,7 +70,7 @@ function getRu(client, name, url) {
 
     // Send message for all menu of the week
     Object.entries(allDays).forEach((entry) => {
-      const [key, values] = entry
+      const [key] = entry
       const date = key
       let text = ''
       // Create text for one day
