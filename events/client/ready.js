@@ -88,7 +88,7 @@ function getRu(client, name, url) {
         .catch((err) => console.error(err))
     })
 
-    console.log(allDays)
+    // console.log(allDays)
   }
 }
 
