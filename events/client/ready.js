@@ -27,7 +27,7 @@ function getRu(client, name, url) {
 
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
-    await page.goto(url)
+    await page.goto(url, {timeout: 0})
 
     const allDays = await page.evaluate(() => {
       const menus = {}
